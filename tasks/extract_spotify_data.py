@@ -85,6 +85,9 @@ except Exception as e:
     TOKEN = get_token()
     songs = search_indian_indie_songs(TOKEN, days=30)
 
+with open("indian_indie_songs.json", "w", encoding="utf-8") as f:
+    json.dump(songs, f, ensure_ascii=False, indent=4)
+
 for idx, song in enumerate(songs):
     artists = song["artists"]
     artists = ", ".join([artist["name"] for artist in artists])
