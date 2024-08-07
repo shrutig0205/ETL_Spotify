@@ -3,4 +3,4 @@ __pycache__/
 list.txt
 airflow_venv/
 logs/
-airflow.db/
+airflow.db
