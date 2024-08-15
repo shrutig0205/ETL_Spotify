@@ -1,7 +1,5 @@
 provider "aws" {
   region     = var.aws_region
-  access_key = var.aws_access_key_id
-  secret_key = var.aws_secret_access_key
 }
 
 resource "aws_s3_bucket_object" "lambda_zip" {
@@ -15,7 +13,7 @@ resource "aws_lambda_function" "etl_spotify" {
   s3_bucket        = var.s3_bucket_name
   s3_key           = aws_s3_bucket_object.lambda_zip.key
   handler          = "lambda_function.lambda_handler"
-  runtime          = "python3.9"  # Update the runtime according to your lambda
+  runtime          = "python3.12" 
   role             = var.lambda_role_arn
 
   layers = [
