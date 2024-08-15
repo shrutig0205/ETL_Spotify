@@ -16,10 +16,6 @@ resource "aws_lambda_function" "etl_spotify" {
   runtime          = "python3.12" 
   role             = var.lambda_role_arn
 
-  layers = [
-    var.lambda_layer_arn
-  ]
-
   environment {
     variables = {
       CLIENT_ID     = var.client_id
