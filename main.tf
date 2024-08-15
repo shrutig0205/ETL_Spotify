@@ -1,36 +1,42 @@
 provider "aws" {
-  region = "us-east-1"
+  region     = var.aws_region
+  access_key = var.aws_access_key_id
+  secret_key = var.aws_secret_access_key
 }
 
-resource "aws_iam_role" "lambda_role" {
-  name = "lambda_role"
+variable "aws_region" {}
+variable "aws_access_key_id" {}
+variable "aws_secret_access_key" {}
+variable "s3_bucket_name" {}
+variable "lambda_role_arn" {}
+variable "lambda_layer_arn" {} # Add this variable
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Action    = "sts:AssumeRole",
-        Effect    = "Allow",
-        Principal = {
-          Service = "lambda.amazonaws.com"
-        }
-      }
-    ]
-  })
+resource "aws_s3_bucket_object" "lambda_zip" {
+  bucket = var.s3_bucket_name
+  key    = "etlSpotify.zip"
+  source = "lambda_function.zip"
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
-  role       = aws_iam_role.lambda_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+resource "aws_lambda_function" "etl_spotify" {
+  function_name    = "etlSpotify"
+  s3_bucket        = var.s3_bucket_name
+  s3_key           = aws_s3_bucket_object.lambda_zip.key
+  handler          = "lambda_function.lambda_handler"
+  runtime          = "python3.9"  # Update the runtime according to your lambda
+  role             = var.lambda_role_arn
+
+  layers = [
+    var.lambda_layer_arn
+  ]
+
+  environment {
+    variables = {
+      CLIENT_ID     = var.client_id
+      CLIENT_SECRET = var.client_secret
+    }
+  }
 }
 
-resource "aws_lambda_function" "lambda_function" {
-  function_name = "ETL_Spotify__lambda_function"
-  role          = aws_iam_role.lambda_role.arn
-  handler       = "lambda_function.lambda_handler"
-  runtime       = "python3.8"
-  
-  filename      = "lambda_function_payload.zip"
-  
-  source_code_hash = filebase64sha256("lambda_function_payload.zip")
+output "lambda_function_name" {
+  value = aws_lambda_function.etl_spotify.function_name
 }
