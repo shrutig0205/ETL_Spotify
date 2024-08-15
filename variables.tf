@@ -33,7 +33,4 @@ variable "lambda_role_arn" {
   type        = string
 }
 
-variable "lambda_layer_arn" {
-  description = "ARN of the Lambda layer"
-  type        = string
-}
+
