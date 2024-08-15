@@ -1,6 +1,6 @@
 .env
 __pycache__/
-list.txt
-airflow_venv/
-logs/
-airflow.db
+terraform-lambda-deploy/
+terraform.exe
+terraform*.zip
+list
