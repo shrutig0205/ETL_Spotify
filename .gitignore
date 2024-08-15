@@ -1,2 +1,5 @@
 .env
 __pycache__/
+terraform-lambda-deploy/
+terraform.exe
+terraform*.zip
