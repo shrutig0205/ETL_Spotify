@@ -1,11 +1,7 @@
 import base64
 import json
 import os
-
-from dotenv import load_dotenv
 from requests import get, post
-
-load_dotenv()
 
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
@@ -31,7 +27,7 @@ def get_token():
     return token
 
 
-TOKEN = get_token()
+# TOKEN = get_token()
 
 
 def get_auth_header(token):
@@ -79,16 +75,16 @@ def search_indian_indie_songs(token, days=30):
 # for idx, song in enumerate(songs):
 #     print(f"{idx + 1}. {song ['name']}")
 
-try:
-    songs = search_indian_indie_songs(TOKEN, days=30)
-except Exception as e:
-    TOKEN = get_token()
-    songs = search_indian_indie_songs(TOKEN, days=30)
+# try:
+#     songs = search_indian_indie_songs(TOKEN, days=30)
+# except Exception as e:
+#     TOKEN = get_token()
+#     songs = search_indian_indie_songs(TOKEN, days=30)
 
-with open("indian_indie_songs.json", "w", encoding="utf-8") as f:
-    json.dump(songs, f, ensure_ascii=False, indent=4)
+# with open("indian_indie_songs.json", "w", encoding="utf-8") as f:
+#     json.dump(songs, f, ensure_ascii=False, indent=4)
 
-for idx, song in enumerate(songs):
-    artists = song["artists"]
-    artists = ", ".join([artist["name"] for artist in artists])
-    print(f"{idx + 1}. {song ['name']} - {artists}")
+# for idx, song in enumerate(songs):
+#     artists = song["artists"]
+#     artists = ", ".join([artist["name"] for artist in artists])
+#     print(f"{idx + 1}. {song ['name']} - {artists}")

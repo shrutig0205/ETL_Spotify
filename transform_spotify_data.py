@@ -24,10 +24,10 @@ def process_spotify_response(tracks):
     song_df = pd.DataFrame(songs)
     return song_df
 
-with open('indian_indie_songs.json', 'r') as file:
-    data = json.load(file)
+# with open('indian_indie_songs.json', 'r') as file:
+#     data = json.load(file)
 
-songs_data_df = process_spotify_response(data)
-print(songs_data_df)
+# songs_data_df = process_spotify_response(data)
+# print(songs_data_df)
 
-songs_data_df.to_csv("songs_list.csv",index=False)
+# songs_data_df.to_csv("songs_list.csv",index=False)
