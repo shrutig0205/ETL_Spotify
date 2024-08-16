@@ -20,6 +20,7 @@ resource "aws_lambda_function" "etl_spotify" {
     variables = {
       CLIENT_ID     = var.client_id
       CLIENT_SECRET = var.client_secret
+      S3_BUCKET_NAME = var.s3_bucket_name
     }
   }
 }
