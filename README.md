@@ -13,19 +13,19 @@ This project implements a fully automated ETL (Extract, Transform, Load) data pi
 ## Project Structure
 ```plaintext
 .
-├── extract_spotify_data.py       # Extracts data from Spotify API
+├── extract_spotify_data.py               # Extracts data from Spotify API
 ├── transform_spotify_data.py             # Transforms the extracted data
 ├── load_spotify_data_.py                 # Loads the transformed data to S3
-├── main.tf                   # Terraform configuration file
-├── variables.tf              # Terraform variables
+├── main.tf                               # Terraform configuration file
+├── variables.tf                          # Terraform variables
 ├── .github/
 │   └── workflows/
-│       └── deploy_lambda.yml     # GitHub Actions workflow for deployment
-├── requirements.txt              # Python dependencies
-└── README.md                     # Project README
+│       └── deploy_lambda.yml             # GitHub Actions workflow for deployment
+├── requirements.txt                      # Python dependencies
+└── README.md                             # Project README
 ```
 ## Prerequisites
-- **Python 3.12**: Ensure you have Python 3.x installed.
+- **Python 3.12**: Ensure you have Python 3.12 installed.
 - **AWS Account**: Set up an AWS account to deploy the Lambda functions.
 - **Terraform**: Install Terraform to manage AWS resources.
 - **GitHub Actions**: CI/CD integration requires setting up GitHub Actions.
