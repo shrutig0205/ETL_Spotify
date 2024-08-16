@@ -9,12 +9,13 @@ resource "aws_s3_bucket_object" "lambda_zip" {
 }
 
 resource "aws_lambda_function" "etl_spotify" {
-  function_name    = "etlSpotify"
+  function_name    = var.lambda_function_name
   s3_bucket        = var.s3_bucket_name
   s3_key           = aws_s3_bucket_object.lambda_zip.key
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.12" 
   role             = var.lambda_role_arn
+  timeout          = 60 
 
   environment {
     variables = {
@@ -28,3 +29,4 @@ resource "aws_lambda_function" "etl_spotify" {
 output "lambda_function_name" {
   value = aws_lambda_function.etl_spotify.function_name
 }
+

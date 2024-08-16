@@ -32,5 +32,9 @@ variable "lambda_role_arn" {
   description = "ARN of the IAM role for the Lambda function"
   type        = string
 }
+variable "lambda_function_name" {
+  description = "Lambda function name"
+  type        = string
+}
 
 
