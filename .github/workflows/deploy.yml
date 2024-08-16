@@ -46,7 +46,7 @@ jobs:
     - name: Delete Existing Lambda Function
       run: |
         aws lambda delete-function --function-name ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }}
-        continue-on-error: true  # Continue even if the Lambda function does not exist
+      continue-on-error: true  # Continue even if the Lambda function does not exist
 
     - name: Terraform Init
       run: terraform init
