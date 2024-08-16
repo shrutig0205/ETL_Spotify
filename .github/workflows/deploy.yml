@@ -20,6 +20,7 @@ jobs:
       TF_VAR_lambda_role_arn: ${{ secrets.AWS_LAMBDA_ROLE_ARN }}
       TF_VAR_client_id: ${{ secrets.CLIENT_ID }}
       TF_VAR_client_secret: ${{ secrets.CLIENT_SECRET }}
+      TF_VAR_lambda_function_name: ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }}
       TF_LOG: DEBUG
     steps:
     - name: Checkout code
@@ -42,6 +43,11 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
+    - name: Delete Existing Lambda Function
+      run: |
+        aws lambda delete-function --function-name ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }}
+        continue-on-error: true  # Continue even if the Lambda function does not exist
+
     - name: Terraform Init
       run: terraform init
 
@@ -50,4 +56,3 @@ jobs:
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
-      
