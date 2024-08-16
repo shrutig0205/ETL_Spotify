@@ -1,3 +1,3 @@
-# ETL_Spotify
-set AIRFLOW_HOME=D:\Project\ETL_Spotify
-airflow db init
+# Spotify ETL Pipeline using AWS Lambda and Terraform
+
+![Spotify ETL Pipeline](https://github.com/user-attachments/assets/6dd6b7cf-1bde-4adc-81eb-0fe37a6b2cb1)
